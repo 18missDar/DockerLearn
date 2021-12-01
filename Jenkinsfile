@@ -32,7 +32,7 @@ pipeline{
 						app.withRun("--name app --network ${n}") { c ->
 							client.inside("--network ${n}") {
                                 				echo "I'm client!"
-                                				sh "sleep 5"
+//                                 				sh "sleep 5"
 								sh "curl http://app:8080"
 							}
 						}
