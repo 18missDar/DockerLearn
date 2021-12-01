@@ -1,7 +1,8 @@
 FROM maven:3.8.3-jdk-11 AS build
 WORKDIR /hello_world
 
-COPY ./ ./
+COPY src ./src
+COPY pom.xml ./
 
 RUN mvn clean package
 
