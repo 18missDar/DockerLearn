@@ -35,6 +35,7 @@ pipeline{
                                 				sh "sleep 5"
 								sh "curl http://app:8080 > curl_output.txt"
                 sh "cat curl_output.txt"
+                archiveArtifacts artifacts: 'curl_output.txt'
 							}
 						}
           				}
