@@ -20,7 +20,7 @@ pipeline{
 				sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/hello_world:latest .'
 			}
 		}
-		
+
 		stage("Check") {
 			agent any
 			steps {
@@ -32,8 +32,9 @@ pipeline{
 						app.withRun("--name app --network ${n}") { c ->
 							client.inside("--network ${n}") {
                                 				echo "I'm client!"
-//                                 				sh "sleep 5"
-								sh "curl http://app:8080"
+                                				sh "sleep 5"
+								sh "curl http://app:8080 > curl_output.txt"
+                sh "cat curl_output.txt"
 							}
 						}
           				}
@@ -46,8 +47,8 @@ pipeline{
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}
 		}
-		
-		
+
+
 
 		stage('Push') {
 			steps {
