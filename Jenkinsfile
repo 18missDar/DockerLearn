@@ -33,7 +33,7 @@ pipeline{
 							client.inside("--network ${n}") {
                 echo "I'm client!"
                 sh "sleep 5"
-								sh "curl -S http://app:8080 > curl_output.txt"
+								sh "curl -S --fail http://app:8080 > curl_output.txt"
                 sh "cat curl_output.txt"
                 archiveArtifacts artifacts: 'curl_output.txt'
 							}

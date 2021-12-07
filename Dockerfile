@@ -1,13 +1,13 @@
-FROM maven:3.8.3-jdk-11 AS build
-WORKDIR /hello_world
+FROM maven:3.6.0-jdk-11 AS build
+WORKDIR /petclinic
 
 COPY pom.xml ./
 COPY src ./src
 
 RUN mvn clean package
 
-FROM openjdk:11.0.7-jdk-slim
+FROM openjdk:11-jre-slim
 
-COPY --from=build /hello_world/target/hello_world-*.jar /hello_world.jar
+COPY --from=build /petclinic/target/spring-petclinic-*.jar /petclinic.jar
 
-CMD ["java", "-jar", "hello_world.jar"]
+CMD ["java", "-jar", "petclinic.jar"]
